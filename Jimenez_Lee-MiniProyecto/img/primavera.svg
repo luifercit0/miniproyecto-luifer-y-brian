@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" width="400" height="220">
+  <rect width="400" height="220" fill="#050505"/>
+  <line x1="0" y1="0" x2="400" y2="0" stroke="#ff2233" stroke-width="2"/>
+  <line x1="0" y1="220" x2="400" y2="220" stroke="#ff2233" stroke-width="2"/>
+  <g stroke="rgba(255,34,51,0.06)" stroke-width="1">
+    <line x1="0" y1="44" x2="400" y2="44"/><line x1="0" y1="88" x2="400" y2="88"/>
+    <line x1="0" y1="132" x2="400" y2="132"/><line x1="0" y1="176" x2="400" y2="176"/>
+    <line x1="80" y1="0" x2="80" y2="220"/><line x1="160" y1="0" x2="160" y2="220"/>
+    <line x1="240" y1="0" x2="240" y2="220"/><line x1="320" y1="0" x2="320" y2="220"/>
+  </g>
+  <!-- Flor central grande -->
+  <circle cx="200" cy="105" r="22" fill="#ffaacc" opacity="0.9"/>
+  <circle cx="200" cy="105" r="10" fill="#ffdd00"/>
+  <ellipse cx="200" cy="68" rx="13" ry="20" fill="#ff77aa" opacity="0.85"/>
+  <ellipse cx="200" cy="142" rx="13" ry="20" fill="#ff77aa" opacity="0.85"/>
+  <ellipse cx="163" cy="105" rx="20" ry="13" fill="#ff77aa" opacity="0.85"/>
+  <ellipse cx="237" cy="105" rx="20" ry="13" fill="#ff77aa" opacity="0.85"/>
+  <ellipse cx="173" cy="76" rx="13" ry="19" fill="#ff99bb" opacity="0.75" transform="rotate(-45,173,76)"/>
+  <ellipse cx="227" cy="76" rx="13" ry="19" fill="#ff99bb" opacity="0.75" transform="rotate(45,227,76)"/>
+  <ellipse cx="173" cy="134" rx="13" ry="19" fill="#ff99bb" opacity="0.75" transform="rotate(45,173,134)"/>
+  <ellipse cx="227" cy="134" rx="13" ry="19" fill="#ff99bb" opacity="0.75" transform="rotate(-45,227,134)"/>
+  <!-- Flores pequeñas -->
+  <circle cx="80" cy="150" r="10" fill="#ff77aa" opacity="0.6"/>
+  <circle cx="80" cy="150" r="5" fill="#ffdd00" opacity="0.8"/>
+  <circle cx="320" cy="140" r="10" fill="#ff99bb" opacity="0.6"/>
+  <circle cx="320" cy="140" r="5" fill="#ffdd00" opacity="0.8"/>
+  <!-- Tallo -->
+  <line x1="200" y1="127" x2="200" y2="185" stroke="#004400" stroke-width="3"/>
+  <text x="200" y="205" text-anchor="middle" font-family="monospace" font-size="11" fill="#ff77aa" letter-spacing="4">PRIMAVERA</text>
+</svg>

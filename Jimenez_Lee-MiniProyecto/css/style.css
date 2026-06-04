@@ -1,0 +1,509 @@
+/* ============================================================
+   MINI PROYECTO #2 - Desarrollo Web VII
+   Estilo Global: Tema TRON ROJO
+   Universidad Tecnológica de Panamá
+   Estudiantes: Jimenez & Lee
+   ============================================================ */
+
+/* ── Variables de Color (PSR-1: constantes en UPPER_CASE comentadas) ── */
+:root {
+    --rojo-neon:       #ff2233;
+    --rojo-vivo:       #ff0000;
+    --rojo-oscuro:     #8b0000;
+    --rojo-glow:       rgba(255, 34, 51, 0.6);
+    --rojo-suave:      rgba(255, 34, 51, 0.15);
+    --negro:           #000000;
+    --negro-panel:     #0a0a0a;
+    --negro-card:      #111111;
+    --gris-linea:      #1a1a1a;
+    --blanco:          #ffffff;
+    --blanco-dim:      #cccccc;
+    --fuente-display:  'Orbitron', 'Courier New', monospace;
+    --fuente-body:     'Share Tech Mono', 'Courier New', monospace;
+    --transicion:      0.3s ease;
+    --borde-neon:      1px solid var(--rojo-neon);
+    --sombra-neon:     0 0 8px var(--rojo-glow), 0 0 20px rgba(255,34,51,0.3);
+    --sombra-fuerte:   0 0 15px var(--rojo-glow), 0 0 40px rgba(255,0,0,0.2);
+}
+
+/* ── Importar fuentes Tron ── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+/* ── Reset y base ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--negro);
+    color: var(--blanco);
+    font-family: var(--fuente-body);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    /* Cuadrícula Tron de fondo */
+    background-image:
+        linear-gradient(rgba(255,34,51,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,34,51,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    cursor: default;
+}
+
+/* ── Cursor personalizado (efecto Tron) ── */
+body { cursor: crosshair; }
+a, button, input[type="submit"], input[type="button"] { cursor: pointer; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--negro); }
+::-webkit-scrollbar-thumb { background: var(--rojo-neon); border-radius: 3px; }
+
+/* ── Header principal ── */
+.site-header {
+    background: var(--negro-panel);
+    border-bottom: 2px solid var(--rojo-neon);
+    box-shadow: var(--sombra-fuerte);
+    padding: 22px 40px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+    font-weight: 900;
+    color: var(--rojo-neon);
+    text-shadow: var(--sombra-neon);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.site-header .subtitle {
+    font-size: 0.75rem;
+    color: var(--blanco-dim);
+    letter-spacing: 3px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { text-shadow: 0 0 6px var(--rojo-glow), 0 0 15px rgba(255,34,51,0.3); }
+    50%       { text-shadow: 0 0 12px var(--rojo-glow), 0 0 30px rgba(255,0,0,0.5), 0 0 50px rgba(255,0,0,0.2); }
+}
+
+/* ── Contenedor principal ── */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* ── Títulos de sección ── */
+h2 {
+    font-family: var(--fuente-display);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--rojo-neon);
+    text-shadow: var(--sombra-neon);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: var(--borde-neon);
+}
+
+h3 {
+    font-family: var(--fuente-display);
+    font-size: 0.9rem;
+    color: var(--rojo-neon);
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+
+/* ── Tarjetas / Paneles ── */
+.card {
+    background: var(--negro-card);
+    border: var(--borde-neon);
+    border-radius: 4px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--sombra-neon);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow var(--transicion), transform var(--transicion);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rojo-neon), transparent);
+    animation: scan-line 3s linear infinite;
+}
+
+@keyframes scan-line {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.card:hover {
+    box-shadow: var(--sombra-fuerte);
+    transform: translateY(-2px);
+}
+
+/* ── Grid de menú principal ── */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* ── Botones de navegación (menú) ── */
+.btn-problema {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--negro-card);
+    border: var(--borde-neon);
+    border-radius: 4px;
+    padding: 22px 16px;
+    color: var(--blanco);
+    text-decoration: none;
+    font-family: var(--fuente-display);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all var(--transicion);
+    box-shadow: inset 0 0 0 0 var(--rojo-suave);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-problema .num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--rojo-neon);
+    text-shadow: var(--sombra-neon);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.btn-problema:hover {
+    background: var(--rojo-suave);
+    box-shadow: var(--sombra-fuerte);
+    color: var(--rojo-neon);
+    transform: scale(1.03);
+}
+
+.btn-problema::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--rojo-neon);
+    transition: width 0.4s ease;
+}
+
+.btn-problema:hover::after { width: 100%; }
+
+/* ── Formularios ── */
+/* PSR-4 / OWASP: Inputs validados en clases Utilidades */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--rojo-neon);
+    font-family: var(--fuente-display);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background: #0d0d0d;
+    border: var(--borde-neon);
+    border-radius: 3px;
+    color: var(--blanco);
+    font-family: var(--fuente-body);
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: box-shadow var(--transicion), border-color var(--transicion);
+    appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--rojo-vivo);
+    box-shadow: 0 0 10px var(--rojo-glow);
+}
+
+/* ── Botón submit ── */
+.btn-submit {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--rojo-neon);
+    color: var(--rojo-neon);
+    font-family: var(--fuente-display);
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all var(--transicion);
+    text-shadow: 0 0 6px var(--rojo-glow);
+    box-shadow: 0 0 8px var(--rojo-glow);
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    background: var(--rojo-neon);
+    color: var(--negro);
+    box-shadow: var(--sombra-fuerte);
+    text-shadow: none;
+}
+
+/* ── Resultados / Output ── */
+.resultado {
+    background: #050505;
+    border: var(--borde-neon);
+    border-radius: 4px;
+    padding: 22px;
+    margin-top: 24px;
+    box-shadow: inset 0 0 20px rgba(255,34,51,0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.resultado p {
+    margin-bottom: 8px;
+    color: var(--blanco-dim);
+}
+
+.resultado .valor {
+    color: var(--rojo-neon);
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--rojo-glow);
+}
+
+/* ── Tabla ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 0.88rem;
+}
+
+table th {
+    background: var(--rojo-oscuro);
+    color: var(--blanco);
+    font-family: var(--fuente-display);
+    letter-spacing: 2px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--rojo-neon);
+}
+
+table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--gris-linea);
+    color: var(--blanco-dim);
+    transition: background var(--transicion);
+}
+
+table tr:hover td { background: var(--rojo-suave); color: var(--blanco); }
+
+/* ── Enlace "Volver al Menú" (PSR: función generarEnlaceMenu()) ── */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--rojo-neon);
+    font-family: var(--fuente-display);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: var(--borde-neon);
+    padding: 9px 20px;
+    border-radius: 3px;
+    transition: all var(--transicion);
+    margin-bottom: 28px;
+    box-shadow: 0 0 6px var(--rojo-glow);
+}
+
+.btn-back::before { content: '<<'; }
+.btn-back:hover {
+    background: var(--rojo-suave);
+    box-shadow: var(--sombra-neon);
+}
+
+/* ── Alertas / Errores ── */
+/* OWASP: errores genéricos sin exponer rutas internas */
+.alerta {
+    padding: 12px 18px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    border-left: 3px solid;
+    animation: fadeIn 0.3s ease;
+}
+
+.alerta-error {
+    background: rgba(139,0,0,0.2);
+    border-color: var(--rojo-vivo);
+    color: #ff8888;
+}
+
+.alerta-ok {
+    background: rgba(0,100,0,0.15);
+    border-color: #00cc44;
+    color: #66ff88;
+}
+
+/* ── Canvas para gráficas ── */
+canvas {
+    display: block;
+    margin: 20px auto 0;
+    max-width: 100%;
+    border: var(--borde-neon);
+    border-radius: 4px;
+    background: var(--negro-panel);
+    padding: 8px;
+}
+
+/* ── Lista de potencias / múltiplos ── */
+.lista-resultados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.lista-resultados .item {
+    background: var(--negro-card);
+    border: var(--borde-neon);
+    border-radius: 3px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    color: var(--blanco-dim);
+    transition: all var(--transicion);
+}
+
+.lista-resultados .item:hover {
+    background: var(--rojo-suave);
+    color: var(--rojo-neon);
+    box-shadow: 0 0 8px var(--rojo-glow);
+}
+
+/* ── Badge / Etiqueta de categoría ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    font-family: var(--fuente-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--rojo-neon);
+    color: var(--rojo-neon);
+    background: var(--rojo-suave);
+}
+
+/* ── Divider decorativo ── */
+.divider {
+    border: none;
+    border-top: 1px solid var(--gris-linea);
+    margin: 28px 0;
+    position: relative;
+}
+
+.divider::after {
+    content: '+';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--negro);
+    color: var(--rojo-neon);
+    padding: 0 10px;
+    font-size: 0.7rem;
+}
+
+/* ── Sección info del problema ── */
+.problema-info {
+    font-size: 1rem;
+    color: var(--blanco-dim);
+    border-left: 3px solid var(--rojo-neon);
+    padding-left: 14px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* ── Líneas de cuadrícula decorativas en esquinas ── */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    border-bottom: 2px solid var(--rojo-neon);
+    border-right: 2px solid var(--rojo-neon);
+    opacity: 0.5;
+}
+
+/* ── Footer (archivo externo includes/footer.php) ── */
+.site-footer {
+    background: var(--negro-panel);
+    border-top: 2px solid var(--rojo-neon);
+    box-shadow: 0 -4px 20px rgba(255,34,51,0.2);
+    padding: 20px 40px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.site-footer p {
+    font-family: var(--fuente-display);
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    color: var(--blanco-dim);
+    text-transform: uppercase;
+}
+
+.site-footer .fecha-footer {
+    color: var(--rojo-neon);
+    text-shadow: 0 0 5px var(--rojo-glow);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-header { padding: 16px 18px; }
+    .container { padding: 24px 14px; }
+    .card { padding: 18px; }
+}

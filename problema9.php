@@ -1,9 +1,4 @@
 <?php
-/**
- * PROBLEMA #9 — 15 primeras potencias de un número (1 al 9)
- * PSR-1 · DRY · FOR · Utilidades::potencia() · OWASP
- * Ej: número 4 → 4¹=4, 4²=16, ..., 4¹⁵
- */
 require_once 'includes/Utilidades.php';
 
 $error    = '';
@@ -44,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <header class="site-header">
-    <h1>Problema #9</h1>
+    <h1>[#] Problema #9</h1>
     <p class="subtitle">15 Primeras Potencias de un Número</p>
 </header>
 

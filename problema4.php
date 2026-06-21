@@ -1,12 +1,6 @@
 <?php
-/**
- * PROBLEMA #4 — Suma de pares e impares entre 1 y 200
- * PSR-1 · DRY · WHILE · Operador ternario
- * Resultado no depende de formulario: cálculo determinístico
- */
 require_once 'includes/Utilidades.php';
 
-// ── Cálculo con WHILE (Punto #4: estructura repetitiva while) ──
 $sumaPares    = 0;
 $sumaImpares  = 0;
 $contPares    = 0;
@@ -14,7 +8,6 @@ $contImpares  = 0;
 $i            = 1;
 
 while ($i <= 200) {
-    // Operador ternario para clasificar par/impar
     $esPar = ($i % 2 === 0);
     $esPar ? ($sumaPares += $i) && $contPares++ : ($sumaImpares += $i) && $contImpares++;
     $i++;
@@ -31,7 +24,7 @@ while ($i <= 200) {
 <body>
 
 <header class="site-header">
-    <h1>Problema #4</h1>
+    <h1>[#] Problema #4</h1>
     <p class="subtitle">Suma de Pares e Impares del 1 al 200</p>
 </header>
 

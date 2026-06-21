@@ -1,16 +1,9 @@
 <?php
-/**
- * PROBLEMA #2 — Suma de los números del 1 al 1,000
- * Resultado esperado: 500,500
- * PSR-1: camelCase · DRY · Estructura repetitiva FOR
- * No requiere formulario: resultado determinístico
- */
 require_once 'includes/Utilidades.php';
 
-// ── Cálculo con estructura FOR (Punto #4: estructuras repetitivas) ──
 $suma       = 0;
-$detallePares = 0; // Bonus: suma de pares
-$detalleImpares = 0; // Bonus: suma de impares
+$detallePares = 0;
+$detalleImpares = 0;
 
 for ($i = 1; $i <= 1000; $i++) {
     $suma += $i;
@@ -29,7 +22,7 @@ for ($i = 1; $i <= 1000; $i++) {
 <body>
 
 <header class="site-header">
-    <h1>Problema #2</h1>
+    <h1>[#] Problema #2</h1>
     <p class="subtitle">Suma de los Números del 1 al 1,000</p>
 </header>
 

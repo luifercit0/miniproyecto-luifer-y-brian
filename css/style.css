@@ -458,7 +458,7 @@ canvas {
 
 /* ── Sección info del problema ── */
 .problema-info {
-    font-size: 1rem;
+    font-size: 0.82rem;
     color: var(--blanco-dim);
     border-left: 3px solid var(--rojo-neon);
     padding-left: 14px;

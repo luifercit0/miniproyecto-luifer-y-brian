@@ -1,85 +1,10 @@
 <?php
-/**
- * ============================================================
- * CLASE UTILIDADES
- * Punto #7 y #10 del documento
- * PSR-1: StudlyCaps para nombre de clase, camelCase para metodos
- * Principio DRY: toda logica de validacion/sanitizacion centralizada aqui.
- *   Ningun problema repite estas funciones; todas las llaman desde aqui.
- * ============================================================
- *
- * METODOS ESTATICOS DISPONIBLES (todos llamados como Utilidades::metodo()):
- * ─────────────────────────────────────────────────────────────
- * SANITIZACION / XSS:
- *   sanitizar($valor)             → htmlspecialchars + trim. Previene XSS.
- *
- * VALIDACION (Input Validation):
- *   validarEntero($val,$min,$max) → filter_var FILTER_VALIDATE_INT
- *   validarNumero($valor)         → filter_var FILTER_VALIDATE_FLOAT
- *   validarFecha($fecha)          → preg_match formato fecha
- *   validarEnLista($val,$lista)   → in_array whitelist
- *   nvl(&$var, $default)          → null-safe getter
- *
- * MATEMATICAS (no van "contra la piel" del codigo, van aqui):
- *   raizCuadrada($num)            → sqrt() segura (evita negativo)
- *   potencia($base, $exp)         → pow()
- *   desviacionEstandar($datos)    → formula S = sqrt(sum(x-media)^2 / n-1)
- *
- * NAVEGACION (Punto #12):
- *   generarEnlaceMenu($url)       → genera <a href> del boton "Volver al Menu"
- * ─────────────────────────────────────────────────────────────
- *
- * APLICACIONES OWASP IMPLEMENTADAS EN ESTA CLASE:
- *
- * [OWASP A03:2021 - Injection / XSS]
- *   sanitizar(): usa htmlspecialchars(ENT_QUOTES, UTF-8) para codificar
- *   caracteres como <, >, ", ', & antes de imprimirlos en HTML.
- *   Esto evita que un atacante inyecte <script>alert()</script> a traves
- *   de un campo de formulario y que el navegador lo ejecute.
- *   Referencia: https://www.php.net/manual/es/function.htmlspecialchars.php
- *
- * [OWASP A03:2021 - Injection / Input Validation]
- *   validarEntero(): usa filter_var(FILTER_VALIDATE_INT) con rango min/max.
- *   Garantiza que solo se procese un entero del tipo esperado.
- *   Si el usuario envia texto o un numero fuera de rango, se rechaza antes
- *   de que llegue a cualquier calculo o salida.
- *   Referencia: https://www.php.net/manual/es/function.filter-var.php
- *
- *   validarNumero(): usa filter_var(FILTER_VALIDATE_FLOAT) para presupuestos.
- *   Igual principio: dato rechazado si no es el tipo correcto.
- *
- *   validarFecha(): usa preg_match para verificar el patron de fecha.
- *   Referencia: https://www.php.net/manual/es/function.preg-match.php
- *
- * [OWASP - Secure Error Handling]
- *   generarEnlaceMenu(): usa filter_var(FILTER_SANITIZE_URL) para limpiar
- *   la URL del enlace antes de escribirla en el atributo href.
- *   Evita inyeccion de javascript: o data: en href.
- *
- * USO EN CADA PROBLEMA:
- *   Todo campo POST pasa por Utilidades::sanitizar() ANTES de validarse,
- *   y se valida con validarEntero/validarNumero ANTES de procesarse.
- *   Los mensajes de error son genericos (sin rutas, sin trazas PHP).
- */
 class Utilidades
 {
-    // ══════════════════════════════════════════════════════════
-    // SANITIZACION
-    // OWASP A03:2021 - Prevencion de XSS (Cross-Site Scripting)
-    // ══════════════════════════════════════════════════════════
-
     /**
-     * sanitizar()
-     * Aplica htmlspecialchars() + trim() sobre cualquier valor de entrada.
-     *
      * OWASP A03 - XSS: convierte caracteres peligrosos en entidades HTML:
      *   <  →  &lt;      >  →  &gt;
      *   "  →  &quot;    '  →  &#039;    &  →  &amp;
-     * Asi, aunque el usuario ingrese <script>alert(1)</script>, el navegador
-     * lo mostrara como texto, no lo ejecutara como codigo.
-     *
-     * Se llama en TODOS los problemas antes de imprimir $_POST en HTML:
-     *   Utilidades::sanitizar($_POST['campo'])
      */
     public static function sanitizar(string $valor): string
     {
@@ -87,19 +12,7 @@ class Utilidades
         return htmlspecialchars(trim($valor), ENT_QUOTES, 'UTF-8');
     }
 
-    // ══════════════════════════════════════════════════════════
-    // VALIDACION DE ENTRADAS
-    // OWASP A03:2021 - Input Validation
-    // ══════════════════════════════════════════════════════════
-
-    /**
-     * validarEntero()
-     * Usa filter_var(FILTER_VALIDATE_INT) con rango min/max.
-     *
-     * OWASP A03 - Input Validation: garantiza que el dato sea del tipo
-     * esperado (entero dentro de rango) ANTES de usarlo en calculos.
-     * Si falla, el problema muestra un mensaje de error generico y NO procesa.
-     *
+    /*
      * Usado en: problema1, problema3, problema5, problema7, problema8, problema9
      */
     public static function validarEntero(mixed $valor, int $min = PHP_INT_MIN, int $max = PHP_INT_MAX): bool
@@ -109,26 +22,16 @@ class Utilidades
         ]) !== false;
     }
 
-    /**
-     * validarNumero()
-     * Usa filter_var(FILTER_VALIDATE_FLOAT) para numeros decimales positivos.
-     *
+    /*
      * OWASP A03 - Input Validation: el presupuesto hospitalario (problema6)
-     * no se procesa si el usuario envia texto o un valor negativo.
      */
     public static function validarNumero(mixed $valor): bool
     {
         return filter_var($valor, FILTER_VALIDATE_FLOAT) !== false && $valor > 0;
     }
 
-    /**
-     * validarFecha()
+    /*
      * Usa preg_match para verificar patron de fecha DD-MM o MM/DD/YYYY.
-     *
-     * OWASP A03 - Input Validation: evita procesar cadenas arbitrarias como fechas.
-     * Referencia: https://www.php.net/manual/es/function.preg-match.php
-     *
-     * Usado en: problema8
      */
     public static function validarFecha(string $fecha): bool
     {

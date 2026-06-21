@@ -1,21 +1,4 @@
 <?php
-/**
- * PROBLEMA #1 — Media, Desviacion Estandar, Minimo y Maximo
- * Fuente original: PRoblema1Media.php (adaptado al proyecto)
- *
- * Logica migrada a Utilidades (DRY):
- *   - Calculo de media        → Utilidades::calcularMedia()
- *   - Desviacion estandar     → Utilidades::desviacionEstandarPoblacional()
- *   - Minimo                  → Utilidades::calcularMin()
- *   - Maximo                  → Utilidades::calcularMax()
- *   - Sanitizacion de entrada → Utilidades::sanitizar()
- *   - Validacion de entero    → Utilidades::validarEntero()
- *   - Enlace al menu          → Utilidades::generarEnlaceMenu()
- *
- * PSR-1: camelCase en variables, StudlyCaps en clase
- * OWASP A03: sanitizar() + validarEntero() antes de cualquier calculo
- * Estructura: FOR para recorrer campos del formulario (DRY)
- */
 require_once 'includes/Utilidades.php';
 
 $error      = '';
@@ -60,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <header class="site-header">
-    <h1>Problema #1</h1>
+    <h1>[#] Problema #1</h1>
     <p class="subtitle">Media · Desviacion Estandar · Minimo · Maximo</p>
 </header>
 
@@ -69,12 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?= Utilidades::generarEnlaceMenu('index.php') ?>
 
     <div class="card">
-        <h2>>> Cálculo de media, desviación estándar, número min y máx </h2>
-        <p class="problema-info">
-            Introduce 5 numeros positivos para comenzar los cálculos.
-        </p>
-
-    <!--<div class="card">
         <h2>>> Estadisticas de 5 Numeros Positivos</h2>
         <p class="problema-info">
             Introduce 5 numeros positivos. El sistema calcula:
@@ -82,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Calculos centralizados en <code>Utilidades::calcularMedia()</code>,
             <code>Utilidades::desviacionEstandarPoblacional()</code>,
             <code>Utilidades::calcularMin()</code>, <code>Utilidades::calcularMax()</code>.
-        </p>-->
+        </p>
 
         <!-- FORMULARIO (Punto #9) -->
         <form method="POST" action="">

@@ -1,31 +1,12 @@
 <?php
-/**
- * PROBLEMA #7 — Calculadora de Datos Estadisticos
- * Fuente original: Problema7CalvularodraDatos.php (adaptado al proyecto)
- *
- * Logica migrada a Utilidades (DRY):
- *   - Promedio               → Utilidades::calcularMedia()
- *   - Desviacion estandar    → Utilidades::desviacionEstandarPoblacional()
- *   - Minimo                 → Utilidades::calcularMin()
- *   - Maximo                 → Utilidades::calcularMax()
- *   - Sanitizacion           → Utilidades::sanitizar()
- *   - Validacion de entero   → Utilidades::validarEntero()
- *   - Enlace al menu         → Utilidades::generarEnlaceMenu()
- *
- * Flujo en 2 pasos (del archivo original):
- *   Paso 1: usuario indica cuantas notas quiere ingresar (1-50)
- *   Paso 2: usuario ingresa las notas (0-10), se calculan estadisticas
- *
- * PSR-1 · OWASP A03 · DRY · FOREACH para calculos · Chart.js para grafica
- */
 require_once 'includes/Utilidades.php';
 
 $error    = '';
 $notas    = [];
 $cantidad = 0;
-$etapa    = 1; // 1: pedir cantidad | 2: ingresar notas | 3: resultados
+$etapa    = 1;
 
-// ── Deteccion de etapa ──────────────────────────────────────────────────────
+// Deteccion de etapa
 if (isset($_POST['cantidad']) && !isset($_POST['notas'])) {
 
     // OWASP A03 - XSS + Input Validation en cantidad
@@ -43,7 +24,6 @@ if (isset($_POST['cantidad']) && !isset($_POST['notas'])) {
 
     $cantidad = count($_POST['notas']);
 
-    // Validar cada nota del arreglo (FOREACH — estructura obligatoria del doc)
     foreach ($_POST['notas'] as $idx => $valor) {
         // OWASP A03 - XSS: sanitizar valor antes de procesar
         $notaRaw = Utilidades::sanitizar((string) $valor);
@@ -68,7 +48,7 @@ if (isset($_POST['cantidad']) && !isset($_POST['notas'])) {
     }
 }
 
-// ── Calculos estadisticos (todos delegados a Utilidades — DRY / Punto #7) ──
+//cálculos
 $promedio   = 0.0;
 $desviacion = 0.0;
 $minima     = 0.0;
@@ -100,7 +80,7 @@ if ($etapa === 3 && count($notas) > 0) {
 <body>
 
 <header class="site-header">
-    <h1>Problema #7</h1>
+    <h1>[#] Problema #7</h1>
     <p class="subtitle">Calculadora de Datos Estadisticos</p>
 </header>
 

@@ -1,34 +1,14 @@
 <?php
-/**
- * PROBLEMA #8 — Estacion del Ano
- * Ingresa fecha y retorna la estacion segun la tabla del documento
- * PSR-1 · SWITCH · OWASP · DRY · Operador ternario
- *
- * Tabla del documento:
- * Verano:    21 Dic – 20 Mar
- * Otono:     21 Mar – 21 Jun
- * Invierno:  22 Jun – 22 Sep
- * Primavera: 23 Sep – 20 Dic
- */
+
 require_once 'includes/Utilidades.php';
 
 $error    = '';
 $estacion = null;
 $fechaStr = '';
 
-/**
- * infoEstaciones
- * DRY: unica fuente de verdad para datos visuales de cada estacion.
- * La clave 'imagen' contiene una URL publica de imagen representativa.
- * Para reemplazar una imagen: cambia solo la URL en este arreglo,
- * el resto del codigo NO necesita modificarse.
- *
- * Si tienes imagenes propias en tu servidor, cambia las URLs por:
- *   'imagen' => 'img/verano.jpg'    (ruta relativa a la carpeta del proyecto)
- */
 $infoEstaciones = [
     'Verano' => [
-        'imagen' => 'https://japonpedia.com/wp-content/uploads/2017/07/japon-en-primavera.jpg',
+        'imagen' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
         'alt'    => 'Playa de verano con sol',
         'desc'   => 'Caluroso y soleado',
     ],
@@ -49,35 +29,23 @@ $infoEstaciones = [
     ],
 ];
 
-/**
- * determinarEstacion()
- * Recibe mes y dia enteros, retorna el nombre de la estacion usando SWITCH.
- * PSR-1: camelCase · DRY: logica concentrada aqui, no repetida en el HTML
- *
- * OWASP - Secure Error Handling:
- *   El caso default retorna 'Desconocido' en lugar de lanzar un error
- *   con informacion interna del servidor.
- */
 function determinarEstacion(int $mes, int $dia): string
 {
-    // Clave numerica: mes*100 + dia  (ej: 25 de sep = 925)
+  
     $clave = $mes * 100 + $dia;
 
     switch (true) {
-        // Verano: 21 Dic (1221) al 20 Mar (320) — cruza el anno nuevo
+     
         case ($clave >= 1221 || $clave <= 320):  return 'Verano';
-        // Otono:  21 Mar (321) al 21 Jun (621)
         case ($clave >= 321  && $clave <= 621):  return 'Otono';
-        // Invierno: 22 Jun (622) al 22 Sep (922)
         case ($clave >= 622  && $clave <= 922):  return 'Invierno';
-        // Primavera: 23 Sep (923) al 20 Dic (1220)
         case ($clave >= 923  && $clave <= 1220): return 'Primavera';
         // OWASP Secure Error Handling: caso invalido sin exponer datos internos
         default: return 'Desconocido';
     }
 }
 
-// ── Procesamiento POST ──────────────────────────────────────────
+// Procesamiento POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // OWASP A03 - XSS: sanitizar entrada antes de cualquier uso
@@ -107,10 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problema #8 - Estacion del Año</title>
+    <title>Problema #8 - Estacion del Ano</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Imagen de estacion: cuadrada, bordeada con efecto neon */
         .img-estacion {
             width: 100%;
             max-width: 420px;
@@ -127,12 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <header class="site-header">
-    <h1>Problema #8</h1>
+    <h1>[#] Problema #8</h1>
     <p class="subtitle">Que Estacion del Ano es?</p>
 </header>
 
 <main class="container">
-    <!-- Punto #12: enlace generado por Utilidades::generarEnlaceMenu() con parametro URL -->
+
     <?= Utilidades::generarEnlaceMenu('index.php') ?>
 
     <div class="card">
@@ -142,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             La imagen de resultado se obtiene del arreglo <code>$infoEstaciones</code> (DRY).
         </p>
 
-        <!-- Tabla de referencia del documento -->
         <table>
             <thead>
                 <tr><th>Estacion</th><th>Periodo</th></tr>
@@ -170,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <hr class="divider">
 
-        <!-- ── FORMULARIO (Punto #9: uso de formularios) ── -->
         <form method="POST" action="">
             <div class="form-group">
                 <label for="fecha">Fecha</label>
@@ -186,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="alerta alerta-error"><?= $error ?></div>
         <?php endif; ?>
 
-        <!-- ── RESULTADO CON IMAGEN ── -->
+        <!-- ── Resultados con imagen  ── -->
         <?php if ($estacion && isset($infoEstaciones[$estacion])): ?>
         <?php $info = $infoEstaciones[$estacion]; ?>
         <div class="resultado" style="text-align:center; padding:28px;">
@@ -210,12 +175,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?= htmlspecialchars($info['desc']) ?>
             </p>
 
-            <!--
-                IMAGEN DE ESTACION
-                Para reemplazar: cambia solo 'imagen' y 'alt' en $infoEstaciones al inicio del archivo.
-                Si usas imagenes locales: 'imagen' => 'img/verano.jpg'
-                OWASP: htmlspecialchars() en src y alt evita XSS si la URL viniera de entrada del usuario.
-            -->
             <img
                 src="<?= htmlspecialchars($info['imagen']) ?>"
                 alt="<?= htmlspecialchars($info['alt']) ?>"
@@ -226,7 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </div>
 
-    <!-- Datos de prueba del documento -->
     <div class="card">
         <h3>-- Datos de Prueba (del documento)</h3>
         <p style="color:var(--blanco-dim); font-size:0.85rem;">

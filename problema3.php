@@ -1,24 +1,10 @@
 <?php
-/**
- * PROBLEMA #3 — N primeros multiples de 4
- * Fuente original: Problema3multiplos.php (adaptado al proyecto)
- *
- * Logica migrada a Utilidades (DRY):
- *   - Generacion de multiplos → Utilidades::generarMultiplos(4, $n)
- *   - Sanitizacion            → Utilidades::sanitizar()
- *   - Validacion de entero    → Utilidades::validarEntero()
- *   - Enlace al menu          → Utilidades::generarEnlaceMenu()
- *
- * PSR-1 · OWASP A03 · DRY · Estructura FOR dentro de Utilidades::generarMultiplos()
- * Limite maximo: 10,000 (seguridad de servidor — del archivo original: 100,000)
- */
 require_once 'includes/Utilidades.php';
 
 $error     = '';
 $multiplos = [];
 $n         = 0;
 
-// ── Procesamiento POST ──────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // OWASP A03 - XSS: sanitizar el valor recibido
     $nRaw = Utilidades::sanitizar(Utilidades::nvl($_POST['n'], ''));
@@ -45,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <header class="site-header">
-    <h1>Problema #3</h1>
+    <h1>[#] Problema #3</h1>
     <p class="subtitle">N Primeros Multiples de 4</p>
 </header>
 

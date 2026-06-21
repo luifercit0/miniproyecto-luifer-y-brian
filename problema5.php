@@ -1,29 +1,12 @@
 <?php
-/**
- * PROBLEMA #5 — Clasificacion de 5 Edades con estadisticas y graficas
- * Fuente original: Problema5Edad.php (adaptado al proyecto)
- *
- * Logica migrada a Utilidades (DRY):
- *   - Definicion de categorias → Utilidades::getCategorias()
- *   - Clasificacion por edad   → Utilidades::clasificarEdad()
- *   - Edades repetidas         → Utilidades::detectarRepetidos()
- *   - Sanitizacion             → Utilidades::sanitizar()
- *   - Validacion               → Utilidades::validarEntero()
- *   - Enlace al menu           → Utilidades::generarEnlaceMenu()
- *
- * PSR-1 · OWASP A03 · DRY · SWITCH (dentro de clasificarEdad)
- * Graficas: Chart.js (barras + dona) — Punto #5 del documento
- */
 require_once 'includes/Utilidades.php';
 
 $error           = '';
 $personas        = [];
 $mostrarResultados = false;
 
-// DRY: categorias obtenidas de Utilidades, unica fuente de verdad
 $categorias = Utilidades::getCategorias();
 
-// ── Procesamiento POST ──────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     for ($i = 1; $i <= 5; $i++) {
@@ -53,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ── Datos para graficas ──────────────────────────────────────────────────────
+// Datos para graficas
 $conteoCategorias = ['nino' => 0, 'adolescente' => 0, 'adulto' => 0, 'mayor' => 0];
 $edadesRepetidas  = [];
 
@@ -82,7 +65,7 @@ if ($mostrarResultados) {
 <body>
 
 <header class="site-header">
-    <h1>Problema #5</h1>
+    <h1>[#] Problema #5</h1>
     <p class="subtitle">Clasificacion de Edades · Estadisticas · Graficas</p>
 </header>
 

@@ -81,47 +81,56 @@ Las gráficas se generan en el navegador usando la librería **Chart.js (v4.4.0)
 ### Problema #1 — Estadísticas de 5 números
 Calcula media, desviación estándar, mínimo y máximo de 5 números positivos ingresados por formulario.
 
-*(Espacio para captura de pantalla)*
+<img width="870" height="936" alt="Captura de pantalla 2026-06-29 163743" src="https://github.com/user-attachments/assets/1c668bb0-fb3a-47bd-8372-f428dd808acd" />
+
 
 ### Problema #2 — Suma del 1 al 1,000
 Suma todos los enteros del 1 al 1,000 usando un ciclo `for` (resultado esperado: 500,500).
 
-*(Espacio para captura de pantalla)*
+<img width="911" height="781" alt="Captura de pantalla 2026-06-29 163917" src="https://github.com/user-attachments/assets/9ca68550-147c-4693-9ad2-d8248b06b12c" />
+
 
 ### Problema #3 — Múltiplos de 4
 Genera los N primeros múltiplos de 4, donde N es ingresado por el usuario.
 
-*(Espacio para captura de pantalla)*
+<img width="846" height="774" alt="Captura de pantalla 2026-06-29 163958" src="https://github.com/user-attachments/assets/d227adfb-3a75-4491-ab62-8d538798a53f" />
+
 
 ### Problema #4 — Pares e impares (1–200)
 Calcula, de forma independiente, la suma de los números pares e impares entre 1 y 200 usando un ciclo `while` y operador ternario.
 
-*(Espacio para captura de pantalla)*
+<img width="888" height="838" alt="Captura de pantalla 2026-06-29 164437" src="https://github.com/user-attachments/assets/a4187437-ac11-4e04-986f-9b08d5799778" />
+
 
 ### Problema #5 — Clasificación de edades
 Clasifica la edad de 5 personas en niño, adolescente, adulto o adulto mayor, detecta edades repetidas y muestra gráficas de barras y dona.
 
-*(Espacio para captura de pantalla)*
+<img width="859" height="891" alt="Captura de pantalla 2026-06-29 164127" src="https://github.com/user-attachments/assets/2f42230c-fcf5-47a4-816b-3173bfb8988f" />
+<img width="809" height="833" alt="Captura de pantalla 2026-06-29 164208" src="https://github.com/user-attachments/assets/693e2af9-624a-4eae-9f98-e7491b237336" />
 
 ### Problema #6 — Presupuesto del hospital
 Distribuye un presupuesto hospitalario entre Ginecología (40%), Traumatología (35%) y Pediatría (25%), con gráfica de pastel.
 
-*(Espacio para captura de pantalla)*
+<img width="757" height="941" alt="Captura de pantalla 2026-06-29 164540" src="https://github.com/user-attachments/assets/beebeabf-1920-4604-a5c1-91dca12d84d5" />
 
 ### Problema #7 — Calculadora de datos estadísticos
 Solicita N notas mediante un formulario en dos etapas y calcula promedio, desviación estándar, nota mínima y máxima usando `foreach`.
 
-*(Espacio para captura de pantalla)*
+<img width="783" height="678" alt="Captura de pantalla 2026-06-29 164709" src="https://github.com/user-attachments/assets/377eb246-ffa7-4931-b9a1-7bf348626388" />
+
 
 ### Problema #8 — Estación del año
 Determina la estación del año a partir de una fecha ingresada, validando el formato con `preg_match()`.
 
-*(Espacio para captura de pantalla)*
+<img width="743" height="806" alt="Captura de pantalla 2026-06-29 165027" src="https://github.com/user-attachments/assets/05db3a88-8df8-491a-bd5b-01a69ae8f4c0" />
+
 
 ### Problema #9 — Potencias de un número
 Calcula las 15 primeras potencias de un número entre 1 y 9 ingresado por el usuario.
 
-*(Espacio para captura de pantalla)*
+<img width="740" height="416" alt="image" src="https://github.com/user-attachments/assets/45f14f88-47b5-4ae0-8e20-7aef7cd7ba72" />
+<img width="714" height="768" alt="image" src="https://github.com/user-attachments/assets/b93e0aaf-b1b4-44fc-8ddb-21d92fe806cc" />
+
 
 ## Dificultades y Solución
 
